@@ -1,6 +1,6 @@
 # Rubikey
 
-TODO: Write a gem description
+Rubikey is another Ruby library for verifying, decoding, decrypting and parsing YubiKey OTPs.
 
 ## Installation
 
@@ -19,6 +19,11 @@ Or install it yourself as:
 ## Usage
 
 TODO: Write usage instructions here
+
+
+## Credits
+Inspired by [yubikey](https://github.com/titanous/yubikey)
+
 
 ## Contributing
 

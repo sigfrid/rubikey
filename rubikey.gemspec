@@ -8,9 +8,9 @@ Gem::Specification.new do |spec|
   spec.version       = Rubikey::VERSION
   spec.authors       = ["Sigfrid Dusci"]
   spec.email         = ["sig@farmatotum.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
-  spec.homepage      = ""
+  spec.summary       = %q{Ruby library for YubiKey OTPs.}
+  spec.description   = %q{Another Ruby library for verifying, decoding, decrypting and parsing YubiKey OTPs.}
+  spec.homepage      = "https://github.com/sigfrid/rubikey"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
