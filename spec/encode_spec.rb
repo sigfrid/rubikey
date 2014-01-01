@@ -28,4 +28,20 @@ describe "Encode" do
      it 'detects if a string is not modified hexadecimal' do
       expect('test'.is_modified_hexadecimal?).to be_false
     end
+    
+    it 'converts modified hexadecimal to binary' do
+      expect('dteffujehknhfjbrjnlnldnhcujvddbikngjrtgh'.modified_hexadecimal_to_binary).to eq("-4N\x83i\xB6H\x1C\x8B\xAB\xA2\xB6\x0E\x8F\"\x17\x9BX\xCDV")
+    end
+    
+    it 'detects if modified hexadecimal length is not even before converting to binary' do
+       expect{'dteffujehknhfjbrjnlnldnhcujvddbikngjrtg'.modified_hexadecimal_to_binary}.to raise_error(ArgumentError)
+    end
+    
+    it 'detects if a string is modified hexadecimal before converting to binary' do
+       expect{'test'.modified_hexadecimal_to_binary}.to raise_error(ArgumentError)
+    end
+    
+    it 'converts binary to modified hexadecimal' do
+      expect("-4N\x83i\xB6H\x1C\x8B\xAB\xA2\xB6\x0E\x8F\"\x17\x9BX\xCDV".binary_to_modified_hexadecimal).to eq('dteffujehknhfjbrjnlnldnhcujvddbikngjrtgh')
+    end
 end
