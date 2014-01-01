@@ -2,20 +2,8 @@ module Rubikey::Encode
   MODHEX_CHARS = 'cbdefghijklnrtuv'.split(//)
    
   refine String do
-    def to_binary
+    def hexadecimal_to_binary
       [self].pack('H*')
-    end
-
-    def to_hexadecimal
-      unpack('H*')[0]
-    end
-
-    def is_hexadecimal?
-      self =~ /^[0-9a-fA-F]+$/ ? true : false
-    end
-
-    def is_modified_hexadecimal?
-      self =~ /^[cbdefghijklnrtuv]+$/ ? true : false
     end
     
     def modified_hexadecimal_to_binary
@@ -26,11 +14,23 @@ module Rubikey::Encode
         binary << decode_to_binary(pair)
       end
     end
+
+    def binary_to_hexadecimal
+      unpack('H*')[0]
+    end
     
     def binary_to_modified_hexadecimal
       self.bytes.each_with_object('') do |byte, modhex|
         modhex << decode_to_modified_hexadecimal(byte)
       end
+    end
+
+    def is_hexadecimal?
+      self =~ /^[0-9a-fA-F]+$/ ? true : false
+    end
+
+    def is_modified_hexadecimal?
+      self =~ /^[cbdefghijklnrtuv]+$/ ? true : false
     end
     
     private

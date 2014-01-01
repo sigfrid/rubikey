@@ -3,45 +3,51 @@
 require 'spec_helper'
 
 describe "Encode" do 
-   using Rubikey::Encode
-
-    it 'converts binary to hexadecimal' do
-      expect("i\266H\034\213\253\242\266\016\217\"\027\233X\315V".to_hexadecimal).to eq('69b6481c8baba2b60e8f22179b58cd56')
+  using Rubikey::Encode
+   
+  context 'converts' do
+    it 'hexadecimal to binary' do
+      expect('69b6481c8baba2b60e8f22179b58cd56'.hexadecimal_to_binary).to eq("i\266H\034\213\253\242\266\016\217\"\027\233X\315V")
     end
-
-    it 'converts hexadecimal to binary' do
-      expect('69b6481c8baba2b60e8f22179b58cd56'.to_binary).to eq("i\266H\034\213\253\242\266\016\217\"\027\233X\315V")
+    
+    it 'modified hexadecimal to binary' do
+      expect('dteffujehknhfjbrjnlnldnhcujvddbikngjrtgh'.modified_hexadecimal_to_binary).to eq("-4N\x83i\xB6H\x1C\x8B\xAB\xA2\xB6\x0E\x8F\"\x17\x9BX\xCDV")
     end
+      
+    it 'binary to hexadecimal' do
+      expect("i\266H\034\213\253\242\266\016\217\"\027\233X\315V".binary_to_hexadecimal).to eq('69b6481c8baba2b60e8f22179b58cd56')
+    end
+      
+    it 'binary to modified hexadecimal' do
+      expect("-4N\x83i\xB6H\x1C\x8B\xAB\xA2\xB6\x0E\x8F\"\x17\x9BX\xCDV".binary_to_modified_hexadecimal).to eq('dteffujehknhfjbrjnlnldnhcujvddbikngjrtgh')
+    end
+  end
 
-    it 'detects if a string is hexadecimal' do
+  context 'detects' do
+    it 'when a string is hexadecimal' do
       expect('ecde18dbe76fbd0c33330f1c354871db'.is_hexadecimal?).to be_true
     end
 
-    it 'detects if a string is  not hexadecimal' do
+    it 'when a string is  not hexadecimal' do
       expect('foobar'.is_hexadecimal?).to be_false
     end
 
-    it 'detects if a string is modified hexadecimal' do
+    it 'when a string is modified hexadecimal' do
       expect('dteffujehknhfjbrjnlnldnhcujvddbikngjrtgh'.is_modified_hexadecimal?).to be_true
     end
 
-     it 'detects if a string is not modified hexadecimal' do
+     it 'when a string is not modified hexadecimal' do
       expect('test'.is_modified_hexadecimal?).to be_false
     end
     
-    it 'converts modified hexadecimal to binary' do
-      expect('dteffujehknhfjbrjnlnldnhcujvddbikngjrtgh'.modified_hexadecimal_to_binary).to eq("-4N\x83i\xB6H\x1C\x8B\xAB\xA2\xB6\x0E\x8F\"\x17\x9BX\xCDV")
+    context 'before converting to binary' do
+      it 'when modified hexadecimal length is not even' do
+         expect{'dteffujehknhfjbrjnlnldnhcujvddbikngjrtg'.modified_hexadecimal_to_binary}.to raise_error(ArgumentError)
+      end
+
+      it 'when a string is modified hexadecimal' do
+         expect{'test'.modified_hexadecimal_to_binary}.to raise_error(ArgumentError)
+      end
     end
-    
-    it 'detects if modified hexadecimal length is not even before converting to binary' do
-       expect{'dteffujehknhfjbrjnlnldnhcujvddbikngjrtg'.modified_hexadecimal_to_binary}.to raise_error(ArgumentError)
-    end
-    
-    it 'detects if a string is modified hexadecimal before converting to binary' do
-       expect{'test'.modified_hexadecimal_to_binary}.to raise_error(ArgumentError)
-    end
-    
-    it 'converts binary to modified hexadecimal' do
-      expect("-4N\x83i\xB6H\x1C\x8B\xAB\xA2\xB6\x0E\x8F\"\x17\x9BX\xCDV".binary_to_modified_hexadecimal).to eq('dteffujehknhfjbrjnlnldnhcujvddbikngjrtgh')
-    end
+  end
 end
