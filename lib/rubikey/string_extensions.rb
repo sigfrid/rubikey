@@ -1,11 +1,11 @@
 module Rubikey::StringExtensions
   refine String do
-    def strip_prefix
-      self[-32,32]
+    def last(n)
+      self[-n,n]
     end
     
-    def key_identifier
-      self[0,12]
+    def first(n)
+      self[0,n]
     end
   end
 end
