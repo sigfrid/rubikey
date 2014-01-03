@@ -1,4 +1,4 @@
-require 'vcr_helper'
+require 'spec_helper'
 
 describe "ApiAuthentication" do 
   using Rubikey::StringExtensions
