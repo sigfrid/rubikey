@@ -16,8 +16,8 @@ module Rubikey
       Rubikey::KeyConfig.new(unique_passcode, secret_key)
     end
 
-    def authenticate(api_id, api_key)
-      Rubikey::ApiAuthentication.new(api_id, api_key, @unique_passcode)
+    def authenticate(args)
+      Rubikey::ApiAuthentication.new(api_id: args[:api_id], api_key: args[:api_key], unique_passcode: @unique_passcode)
     end
   end
 end
