@@ -11,5 +11,7 @@ doc/
 lib/bundler/man
 pkg
 rdoc
-spec/vcr_cassettes
 tmp
+
+spec/vcr_cassettes
+spec/authentication_fixtures.yml

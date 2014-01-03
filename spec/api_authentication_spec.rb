@@ -3,9 +3,9 @@ require 'vcr_helper'
 describe "ApiAuthentication" do 
   using Rubikey::StringExtensions
 
-  let(:api_id) { 14568 }
-  let(:api_key) { 'v2AS3oMbInqZ7BbxN/brFayYUaQ=' }
-  let(:unique_passcode) {'ccccccbtcvvhbtfvrujgbdhcbndctghtegcrgfeueguh'}
+  let(:api_id) { LOCAL_ENV['api_id'] }
+  let(:api_key) { LOCAL_ENV['api_key'] }
+  let(:unique_passcode) { LOCAL_ENV['unique_passcode'] }
 
   context 'authenticates' do
     it "a never used OTP" do
