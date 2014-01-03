@@ -1,4 +1,4 @@
-module Rubikey::Encode
+module Rubikey::EncodingExtensions
   MODHEX_CHARS = 'cbdefghijklnrtuv'.split(//)
    
   refine String do

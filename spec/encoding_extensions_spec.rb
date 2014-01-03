@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-describe "Encode" do 
-  using Rubikey::Encode
+describe "EncodingExtensions" do 
+  using Rubikey::EncodingExtensions
    
   context 'converts' do
     it 'hexadecimal to binary' do
